@@ -105,6 +105,7 @@
       <DependentUpon>DatabaseContext.edmx</DependentUpon>
       <LastGenOutput>DatabaseContext.cs</LastGenOutput>
     </Content>
+    <Content Include="Database\DB.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
