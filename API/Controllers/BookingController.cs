@@ -17,7 +17,7 @@ namespace API.Controllers {
             this.BookingService = _BookingService;
         }
 
-        [Route("api/Booking/Get/")]
+        [HttpGet, Route("api/Booking")]
         public IHttpActionResult Get() {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, BookingService.GetBookings()));
@@ -26,7 +26,7 @@ namespace API.Controllers {
             }
         }
 
-        [Route("api/Booking/Get/{int:id}")]
+        [HttpGet, Route("api/Booking/{id}")]
         public IHttpActionResult Get(int id) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, BookingService.GetBooking(id)));
@@ -35,7 +35,7 @@ namespace API.Controllers {
             }
         }
 
-        [Route("api/Booking/Add/")]
+        [HttpPost, Route("api/Booking/Add")]
         public IHttpActionResult Post(BookingModel booking) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, BookingService.AddBooking(booking)));
@@ -44,7 +44,7 @@ namespace API.Controllers {
             }
         }
 
-        [Route("api/Booking/{id:int}/setDate/{datetime:bookingDate}")]
+        [HttpPut, Route("api/Booking/Date")]
         public IHttpActionResult Put(int id, DateTime bookingDate){
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, BookingService.UpdateBookingDate(id, bookingDate)));
@@ -53,7 +53,7 @@ namespace API.Controllers {
             }
         }
 
-        [Route("api/Booking/{id:int}/setStatus/{int:statusId}")]
+        [HttpPut, Route("api/Booking/Status")]
         public IHttpActionResult Put(int id, int statusId) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, BookingService.UpdateBookingStatus(id, statusId)));
@@ -62,7 +62,7 @@ namespace API.Controllers {
             }
         }
 
-        [Route("api/Booking/Delete/{id:int}")]
+        [HttpDelete, Route("api/Booking/Delete/{id}")]
         public IHttpActionResult Delete(int id) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, BookingService.RemoveBooking(id)));

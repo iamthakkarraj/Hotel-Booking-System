@@ -16,7 +16,7 @@ namespace API.Controllers {
             RoomService = _RoomService;
         }
         
-        [Route("api/Room/")]
+        [HttpGet, Route("api/Room/")]
         public IHttpActionResult Get() {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.GetRooms()));
@@ -25,7 +25,7 @@ namespace API.Controllers {
             }
         }
         
-        [Route("api/Room/{id:int}")]
+        [HttpGet, Route("api/Room/{id}")]
         public IHttpActionResult Get(int id) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.GetRoomById(id)));
@@ -34,8 +34,8 @@ namespace API.Controllers {
             }
         }
         
-        [Route("api/Room/{city:string}/{pincode:string}/{price:?int}/category:?int")]
-        public IHttpActionResult Get(string city, string pincode, int? price, int? category) {
+        [HttpGet, Route("api/Room/Search")]
+        public IHttpActionResult Get(int? price = null, int? category = null, string city = null, string pincode = null) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.SearchRoom(city, pincode, price, category)));
             } catch {
@@ -43,7 +43,7 @@ namespace API.Controllers {
             }
         }
 
-        [Route("api/Room/{id:int}/IsAvailable")]
+        [HttpGet, Route("api/Room/IsAvailable/{id}")]
         public IHttpActionResult GetAvailibility(int id) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.IsAvailable(id)));
@@ -52,7 +52,7 @@ namespace API.Controllers {
             }
         }
 
-        [Route("api/Room/Add")]
+        [HttpPost, Route("api/Room/Add")]
         public IHttpActionResult Post(RoomModel room) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.AddRoom(room)));
@@ -61,7 +61,7 @@ namespace API.Controllers {
             }
         }
 
-        [Route("api/Room/Delete/{id:int}")]
+        [HttpDelete, Route("api/Room/Delete/{id}")]
         public IHttpActionResult Delete(int id) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.DeleteRoom(id)));
