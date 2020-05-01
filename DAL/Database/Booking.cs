@@ -16,6 +16,7 @@ namespace DAL.Database
     {
         public int BookingId { get; set; }
         public int RoomId { get; set; }
+        public System.DateTime BookingDate { get; set; }
         public int Status { get; set; }
     
         public virtual Room Room { get; set; }

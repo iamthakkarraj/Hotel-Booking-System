@@ -12,7 +12,7 @@ namespace BLL.Services {
 
     public class HotelService : IHotelService {
 
-        IHotelRepository HotelRepository;
+        readonly IHotelRepository HotelRepository;
 
         public HotelService(IHotelRepository _HotelRepository) {
             HotelRepository = _HotelRepository;

@@ -10,22 +10,22 @@ using System.Web.Http;
 namespace API.Controllers {
     public class RoomController : ApiController {
 
-        IRoomService RoomService;
+        private readonly IRoomService RoomService;
 
         public RoomController(IRoomService _RoomService) {
             RoomService = _RoomService;
         }
-
-        // GET: api/Room
+        
+        [Route("api/Room/")]
         public IHttpActionResult Get() {
             try {
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.GetRooms());
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.GetRooms()));
             } catch {
                 return InternalServerError();
             }
         }
-
-        // GET: api/Room/5
+        
+        [Route("api/Room/{id:int}")]
         public IHttpActionResult Get(int id) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.GetRoomById(id)));
@@ -33,7 +33,8 @@ namespace API.Controllers {
                 return InternalServerError();
             }
         }
-
+        
+        [Route("api/Room/{city:string}/{pincode:string}/{price:?int}/category:?int")]
         public IHttpActionResult Get(string city, string pincode, int? price, int? category) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.SearchRoom(city, pincode, price, category)));
@@ -42,6 +43,7 @@ namespace API.Controllers {
             }
         }
 
+        [Route("api/Room/{id:int}/IsAvailable")]
         public IHttpActionResult GetAvailibility(int id) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.IsAvailable(id)));
@@ -50,7 +52,7 @@ namespace API.Controllers {
             }
         }
 
-        // POST: api/Room
+        [Route("api/Room/Add")]
         public IHttpActionResult Post(RoomModel room) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.AddRoom(room)));
@@ -59,7 +61,7 @@ namespace API.Controllers {
             }
         }
 
-        // DELETE: api/Room/5
+        [Route("api/Room/Delete/{id:int}")]
         public IHttpActionResult Delete(int id) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.DeleteRoom(id)));

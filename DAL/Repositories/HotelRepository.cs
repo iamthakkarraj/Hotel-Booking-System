@@ -10,7 +10,7 @@ namespace DAL.Repositories {
 
     public class HotelRepository : IHotelRepository {
 
-        private WebApiAssignmentEntities DBContext;
+        private readonly WebApiAssignmentEntities DBContext;
 
         public HotelRepository() {
             DBContext = new WebApiAssignmentEntities();
@@ -21,12 +21,12 @@ namespace DAL.Repositories {
         /// </summary>
         /// <param name="hotel">Object of hotel</param>
         /// <returns>boolean</returns>
-        public Boolean AddHotel(Hotel hotel) {
+        public bool AddHotel(Hotel hotel) {
             try {
                 DBContext.Hotels.Add(hotel);
                 DBContext.SaveChanges();
                 return true;
-            } catch(Exception e) {
+            } catch {
                 return false;
             }
         }
@@ -36,7 +36,7 @@ namespace DAL.Repositories {
         /// </summary>
         /// <param name="id">Unique id of hotel</param>
         /// <returns>boolean</returns>
-        public Boolean DeleteHotel(int id) {
+        public bool DeleteHotel(int id) {
             try {
                 DBContext.Hotels.Remove(DBContext.Hotels.Where(x => x.HotelId == id).FirstOrDefault());
                 DBContext.SaveChanges();

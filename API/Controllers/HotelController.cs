@@ -11,7 +11,7 @@ namespace API.Controllers {
 
     public class HotelController : ApiController {
 
-        private IHotelService HotelService;
+        private readonly IHotelService HotelService;
 
         public HotelController() {
 
@@ -21,7 +21,7 @@ namespace API.Controllers {
             HotelService = _HotelService;
         }
 
-        // GET: api/Hotel
+        [Route("api/Hotel/Get/")]
         public IHttpActionResult Get() {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, HotelService.GetHotels()));
@@ -30,7 +30,7 @@ namespace API.Controllers {
             }
         }
 
-        // GET: api/Hotel/5
+        [Route("api/Hotel/Get/{id:int}")]
         public IHttpActionResult Get(int id) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, HotelService.GetHotelById(id)));
@@ -39,7 +39,7 @@ namespace API.Controllers {
             }
         }
 
-        // POST: api/Hotel
+        [Route("api/Hotel/Add/")]
         public IHttpActionResult Post(HotelModel hotel) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, HotelService.AddHotel(hotel)));
@@ -48,7 +48,7 @@ namespace API.Controllers {
             }
         }
 
-        // DELETE: api/Hotel/5
+        [Route("api/Hotel/Delete/{id:int}")]
         public IHttpActionResult Delete(int id) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, HotelService.DeleteHotel(id)));

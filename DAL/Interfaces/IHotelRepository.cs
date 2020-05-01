@@ -13,8 +13,8 @@ namespace DAL.Interfaces {
         Hotel GetHotelById(int id);
         List<Hotel> GetHotelByCity(string city);
         List<Hotel> GetHotelByPincode(string pincode);
-        Boolean AddHotel(Hotel hotel);
-        Boolean DeleteHotel(int id);        
+        bool AddHotel(Hotel hotel);
+        bool DeleteHotel(int id);        
 
     }
 

@@ -33,6 +33,5 @@ GO
 
 CREATE TABLE Booking ([BookingId] INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
 						[RoomId] INT FOREIGN KEY REFERENCES [Room]([RoomId]) NOT NULL,
+						[BookingDate] DATE NOT NULL,
 						[Status] INT CHECK ([Status]>0 AND [Status]<5) DEFAULT 1 NOT NULL)
-
-INSERT INTO Hotel VALUES('Hotel','Address','City','Pincode','ContactNo','ContactPerson','Website','Facebook','Twitter',1,SYSDATETIME(),NULL,1)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,11 @@ namespace DAL.Interfaces {
 
     public interface IBookingRepository {
 
-        Boolean AddBooking();
-
-        Boolean UpdateBooking();
+        bool AddBooking(Booking booking);
+        bool UpdateBooking(Booking booking);
+        bool RemoveBooking(int id);
+        List<Booking> GetBookings();
+        Booking GetBooking(int id);        
 
     }
 

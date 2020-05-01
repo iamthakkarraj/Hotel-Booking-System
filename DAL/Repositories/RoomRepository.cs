@@ -9,8 +9,13 @@ using System.Threading.Tasks;
 namespace DAL.Repositories {
 
     public class RoomRepository : IRoomRepository {
-        
-        private WebApiAssignmentEntities DBContext;
+
+        public const int CATEGORY_1 = 1;
+        public const int CATEGORY_2 = 2;
+        public const int CATEGORY_3 = 3;
+        public const int CATEGORY_DEFAULT = 0;
+
+        private readonly WebApiAssignmentEntities DBContext;
         public RoomRepository() {
             DBContext = new WebApiAssignmentEntities();
         }
@@ -20,12 +25,12 @@ namespace DAL.Repositories {
         /// </summary>
         /// <param name="room">Object of room</param>
         /// <returns>Boolean</returns>
-        public Boolean AddRoom(Room room) {
+        public bool AddRoom(Room room) {
             try {
                 DBContext.Rooms.Add(room);
                 DBContext.SaveChanges();
                 return true;
-            }catch(Exception e) {
+            }catch {
                 return false;
             }
         }
@@ -35,7 +40,7 @@ namespace DAL.Repositories {
         /// </summary>
         /// <param name="room">Object of room</param>
         /// <returns>Boolean</returns>
-        public Boolean UpdateRoom(Room room) {
+        public bool UpdateRoom(Room room) {
             throw new NotImplementedException();
         }
 
@@ -44,7 +49,7 @@ namespace DAL.Repositories {
         /// </summary>
         /// <param name="id">Id of the room</param>
         /// <returns>Boolean</returns>
-        public Boolean DeleteRoom(int id) {
+        public bool DeleteRoom(int id) {
             try {
                 DBContext.Rooms.Remove(DBContext.Rooms.Where(x =>  x.RoomId == id).FirstOrDefault());
                 DBContext.SaveChanges();
@@ -53,14 +58,6 @@ namespace DAL.Repositories {
                 return false;
             }
         }
-
-        /// <summary>
-        /// Returns list of room
-        /// </summary>
-        /// <returns>List<Room></returns>
-        public List<Room> GetRooms() {
-            return DBContext.Rooms.ToList();
-        }        
 
         /// <summary>
         /// Get room by id
@@ -80,13 +77,8 @@ namespace DAL.Repositories {
         /// <param name="price">Price</param>
         /// <param name="category">Category</param>
         /// <returns>List<Room></returns>
-        public List<Room> SearchRoom(string city, string pincode, int? price, int? category) {
-            IQueryable<Room> query = DBContext.Rooms.OrderBy(x => x.Price);
-            if (city != null)  query = query.Where(x => x.Hotel.City == city);
-            if (pincode != null) query = query.Where(x => x.Hotel.PinCode == pincode);
-            if (price != null) query = query.Where(x => x.Price == price);
-            if (category != null) query = query.Where(x => x.Category == category);
-            return query.ToList();                        
+        public IQueryable<Room> GetRoomsQueryable() {
+            return DBContext.Rooms;
         }
 
         /// <summary>
@@ -94,14 +86,13 @@ namespace DAL.Repositories {
         /// </summary>
         /// <param name="id">id of the room</param>
         /// <returns>Boolean</returns>
-        public Boolean IsAvailable(int id) {            
+        public bool IsAvailable(int id) {            
             return (0 == DBContext.Bookings                    
                         .Where(x => x.RoomId == id)
-                            .Where(x => x.Status != 4)
-                                .Count()) 
-                        ? true 
-                        : false;
-        }
+                        .Where(x => x.Status != BookingRepository.STATUS_DELETED)
+                        .Where(x => x.Status != BookingRepository.STATUS_CANCELLED)
+                        .Count()) ? true : false;
+        }   
 
     }
 

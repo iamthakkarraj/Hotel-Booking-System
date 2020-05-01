@@ -9,8 +9,8 @@ namespace BLL.Interfaces {
 
     public interface IHotelService {
 
-        Boolean AddHotel(HotelModel hotel);
-        Boolean DeleteHotel(int id);
+        bool AddHotel(HotelModel hotel);
+        bool DeleteHotel(int id);
         List<HotelModel> GetHotels();
         HotelModel GetHotelById(int id);
         List<HotelModel> GetHotelByCity(string city);

@@ -10,13 +10,13 @@ namespace BLL.Interfaces {
 
     public interface IRoomService {
 
-        Boolean AddRoom(RoomModel room);
-        Boolean UpdateRoom(RoomModel room);
-        Boolean DeleteRoom(int id);
+        bool AddRoom(RoomModel room);
+        bool UpdateRoom(RoomModel room);
+        bool DeleteRoom(int id);
         List<RoomModel> GetRooms();
         List<RoomModel> SearchRoom(string city, string pincode, int? price, int? category);
-        RoomModel GetRoomById(int id);        
-        Boolean IsAvailable(int id);
+        RoomModel GetRoomById(int id);
+        bool IsAvailable(int id);
 
     }
 

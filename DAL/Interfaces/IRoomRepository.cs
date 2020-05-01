@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 namespace DAL.Interfaces {
 
     public interface IRoomRepository {
-                                
-        Boolean AddRoom(Room room);
-        Boolean UpdateRoom(Room room);
-        Boolean DeleteRoom(int id);
-        List<Room> GetRooms();
-        List<Room> SearchRoom(string city, string pincode, int? price, int? category);
-        Room GetRoomById(int id);        
-        Boolean IsAvailable(int id);
+
+        bool AddRoom(Room room);
+        bool UpdateRoom(Room room);
+        bool DeleteRoom(int id);        
+        IQueryable<Room> GetRoomsQueryable();
+        Room GetRoomById(int id);
+        bool IsAvailable(int id);        
 
     }
 

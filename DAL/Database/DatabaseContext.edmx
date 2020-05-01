@@ -11,6 +11,7 @@
           </Key>
           <Property Name="BookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoomId" Type="int" Nullable="false" />
+          <Property Name="BookingDate" Type="date" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Hotel">
@@ -46,7 +47,7 @@
           <Property Name="UpdatedDate" Type="date" />
           <Property Name="UploadedBy" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__Booking__RoomId__5629CD9C">
+        <Association Name="FK__Booking__RoomId__5CD6CB2B">
           <End Role="Room" Type="Self.Room" Multiplicity="1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -74,7 +75,7 @@
           <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Room" EntityType="Self.Room" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Booking__RoomId__5629CD9C" Association="Self.FK__Booking__RoomId__5629CD9C">
+          <AssociationSet Name="FK__Booking__RoomId__5CD6CB2B" Association="Self.FK__Booking__RoomId__5CD6CB2B">
             <End Role="Room" EntitySet="Room" />
             <End Role="Booking" EntitySet="Booking" />
           </AssociationSet>
@@ -94,8 +95,9 @@
           </Key>
           <Property Name="BookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoomId" Type="Int32" Nullable="false" />
+          <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Room" Relationship="Self.FK__Booking__RoomId__5629CD9C" FromRole="Booking" ToRole="Room" />
+          <NavigationProperty Name="Room" Relationship="Self.FK__Booking__RoomId__5CD6CB2B" FromRole="Booking" ToRole="Room" />
         </EntityType>
         <EntityType Name="Hotel">
           <Key>
@@ -130,10 +132,10 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="0" />
           <Property Name="UploadedBy" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__RoomId__5629CD9C" FromRole="Room" ToRole="Booking" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__RoomId__5CD6CB2B" FromRole="Room" ToRole="Booking" />
           <NavigationProperty Name="Hotel" Relationship="Self.FK__Room__HotelId__4E88ABD4" FromRole="Room" ToRole="Hotel" />
         </EntityType>
-        <Association Name="FK__Booking__RoomId__5629CD9C">
+        <Association Name="FK__Booking__RoomId__5CD6CB2B">
           <End Role="Room" Type="Self.Room" Multiplicity="1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
           <ReferentialConstraint>
@@ -161,7 +163,7 @@
           <EntitySet Name="Bookings" EntityType="Self.Booking" />
           <EntitySet Name="Hotels" EntityType="Self.Hotel" />
           <EntitySet Name="Rooms" EntityType="Self.Room" />
-          <AssociationSet Name="FK__Booking__RoomId__5629CD9C" Association="Self.FK__Booking__RoomId__5629CD9C">
+          <AssociationSet Name="FK__Booking__RoomId__5CD6CB2B" Association="Self.FK__Booking__RoomId__5CD6CB2B">
             <End Role="Room" EntitySet="Rooms" />
             <End Role="Booking" EntitySet="Bookings" />
           </AssociationSet>
@@ -181,6 +183,7 @@
               <MappingFragment StoreEntitySet="Booking">
                 <ScalarProperty Name="BookingId" ColumnName="BookingId" />
                 <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+                <ScalarProperty Name="BookingDate" ColumnName="BookingDate" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>
