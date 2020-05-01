@@ -10,6 +10,7 @@ namespace API {
         public static void Register(HttpConfiguration config) {            
             
             config.MapHttpAttributeRoutes();
+            config.Filters.Add(new BasicAuthenticationAttribute());
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

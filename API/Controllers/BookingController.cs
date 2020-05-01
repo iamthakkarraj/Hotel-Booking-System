@@ -9,6 +9,7 @@ using System.Web.Http;
 
 namespace API.Controllers {
 
+    [BasicAuthentication]
     public class BookingController : ApiController {
 
         private readonly IBookingService BookingService;

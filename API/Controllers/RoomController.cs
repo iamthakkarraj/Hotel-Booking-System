@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Web.Http;
 
 namespace API.Controllers {
+
+    [BasicAuthentication]
     public class RoomController : ApiController {
 
         private readonly IRoomService RoomService;
