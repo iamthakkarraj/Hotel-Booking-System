@@ -1,12 +1,12 @@
 ✔ Layering
    |===>| DAL 	 (Data Access Layer)
-	| BLL 	 (Buisness Logic Layer)
+	    | BLL 	 (Buisness Logic Layer)
         | Common (ViewModels)
         | API	 (Application Programming Interface)
 
 ✔ Dependancy Injection
-   |===>| BLl (Injecting Dependancy of Repository Classes From DAL)
-	| API (Injecting Dependancy of Service Classes From BLL)
+    |===>| BLL (Injecting Dependancy of Repository Classes From DAL)
+	     | API (Injecting Dependancy of Service Classes From BLL)
 
 ✔ Model Mapping
    |===>| Using Model Mapper Service From BLL to Map Data Models With View Models
@@ -14,6 +14,10 @@
 ✔ Attribute Routing 
 
 ✔ Only JSON Response 
+
+✔ CORS Enabled
+
+✔ Basic Authentication Using Username And Password
 
 ==================
  DAL LAYER (Rooms)
@@ -33,7 +37,7 @@
 	✔ IRoomService
 	✔ RoomServicce
 	   |===>| Add(room)
-              ✔	| Update(room)
+          ✔| Update(room)
 	      ✔	| Remove(id)
 	      ✔| Get(id)
 	      ✔| GetRooms()
@@ -78,7 +82,7 @@
 		✔ HotelController
 		   |===>| Get()
 		      ✔| Get(id)
-		        | Get(city, pincode) !!
+		      ✔| Get(city,pincode) !!
 		      ✔| Post(Hotel)
 		      ✔	| Delete(id)
 
@@ -98,7 +102,7 @@
 	✔ IBookingService
 	✔ BookingServicce
 	   |===>| Add(Booking)
-              ✔| UpdateBookingDate(id,date)
+          ✔| UpdateBookingDate(id,date)
 	      ✔	| UpdateBookingStatus(id,status)
 	      ✔	| Remove(id)
 	      ✔| Get(id)
@@ -110,21 +114,22 @@
 		   |===>| Get()
 		      ✔| Get(id)
 		      ✔| Post(Booking)
-	              ✔| Put(id,date)
+	          ✔| Put(id,date)
 		      ✔| put(id,status)
 		      ✔| Delete(id)
 
 ==================
 Status of bookings
 ==================
-1. Optional (Default)
-2. Definitive
-3. Cancelled
-4. Deleted 
+0. Optional (Default)
+1. Definitive
+2. Cancelled
+3. Deleted 
 
 ==================
 Cateogires of Room
 ==================
+0. Basic
 1. Categories 1	size <35 m2
 2. Categories 2	size 36-50 m2
 3. Categories 3	size 51-100 m2
