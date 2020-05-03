@@ -1,58 +1,100 @@
-✔ Layering
-   |===>| DAL 	 (Data Access Layer)
-	| BLL 	 (Buisness Logic Layer)
-        | Common (ViewModels)
-        | API	 (Application Programming Interface)
-
-✔ Dependancy Injection
-    |===>| BLL (Injecting Dependancy of Repository Classes From DAL)
-	 | API (Injecting Dependancy of Service Classes From BLL)
-
-✔ Model Mapping
-   |===>| Using Model Mapper Service From BLL to Map Data Models With View Models
-
+✔ Layering (DAL, BLL, Common, API)    
+✔ Dependancy Injection    
+✔ Model Mapping   
 ✔ Attribute Routing 
-
 ✔ Only JSON Response 
-
 ✔ CORS Enabled
-
 ✔ Basic Authentication Using Username And Password
-
-✔ Swagger API Implimentation
+✔ Swagger API Implementation
+✔ Authentication Support in SwaggerUI
 
 ==================
+Functions In Hotel
+==================
+    ◾ GetList
+    ◾ Search (name, city, pincode)    
+    ◾ GetById (id)
+    ◾ Add (hotelModel)
+    ◾ Update (hotelModel)
+    ◾ Delete (id)
+    
+=================
+Functions In Room
+=================
+    ◾ GetList
+    ◾ Search (price, category, city ,pincode)    
+    ◾ GetById (id)
+    ◾ Add (roomModel)
+    ◾ Update (roomModel)
+    ◾ Delete (id)
+    
+====================
+Functions In Booking
+====================
+    ◾ GetList
+    ◾ Search (roomId, hotelId, date)    
+    ◾ GetById (id)
+    ◾ Add (bookingModel)
+    ◾ Update (bookingModel)
+    ◾ Delete (id)       
+
+
+(Status of bookings)
+==================
+id | Value
+==================
+0  | Optional (Default)
+1  | Definitive
+2  | Cancelled
+3  | Deleted 
+
+(Cateogires of Room)
+==================
+id | Value
+==================
+0  | Basic
+1  | Categories 1	size <35 m2
+2  | Categories 2	size 36-50 m2
+3  | Categories 3	size 51-100 m2
+
+==================
+Layering Structure 
+==================
+
+=================
  DAL LAYER (Rooms)
 ==================
 ✔ IRoomRepository
 ✔ RoomRepository
-   |===>| Add(room)
+   |===> |      
+       ✔| GetQueryable()
+       ✔| Add(room)
        ✔| Update(room)
-       ✔| Remove(id)
-       ✔| Get(id)
-       ✔| GetRooms()
-       ✔| GetRoomsQueryable()
+       ✔| Delete(id)       
        ✔| IsAvailable(id)
 =======================
     BLL LAYER (Rooms)
 =======================
 	✔ IRoomService
 	✔ RoomServicce
-	   |===>| Add(room)
-               ✔| Update(room)
-	       ✔| Remove(id)
-	       ✔| Get(id)
+	   |===> |          	       
 	       ✔| GetRooms()
 	       ✔| SearchRoom(city, pincode, price, category)
-	       ✔| IsAvailable(id)
+           ✔| Get(id)	       
+           ✔| Add(room)
+           ✔| Update(room)
+	       ✔| Remove(id)
+           ✔| IsAvailable(id)
 ================================
        API LAYER (Rooms)
 ================================
 		✔ RoomController
-		   |===>| Get()
+		   |===> |
+               ✔| Get()
 		       ✔| Get(id)
   		       ✔| Get(city, pincode, price, category)
  		       ✔| Post(room)
+               ✔| Put(room)
 		       ✔| Delete(id)
  		       ✔| IsAvailable(id)
 
@@ -61,31 +103,33 @@
 ==================
 ✔ IHotelRepository
 ✔ HotelRepository
-   |===>| Add(hotel)
-      ✔| Update(hotel)
-      ✔| Remove(id)
-      ✔| Get(id)
-      ✔| GetHotels()
-        | GetHotelsQueryable() !!
+   |===> |
+       ✔| GetQueryable()
+       ✔| Add(room)
+       ✔| Update(room)
+       ✔| Delete(id)     
 =======================
     BLL LAYER (Hotel)
 =======================
 	✔ IHotelService
 	✔ HotelServicce
-	   |===>| Add(Hotel)
-	      ✔| Update(Hotel)
-	      ✔| Remove(id)
+	   |===>|          
 	      ✔| Get(id)
 	      ✔| GetHotels()
-	        | SearchHotel(city, pincode) !!
+	      ✔| SearchHotel(name, city, pincode)
+          ✔| Add(hotelModel)
+	      ✔| Update(hotelModel)
+	      ✔| Delete(id)
 ================================
        API LAYER (Hotel)
 ================================
 		✔ HotelController
-		   |===>| Get()
+		   |===>| 
+              ✔| Get()
 		      ✔| Get(id)
-		      ✔| Get(city,pincode) !!
-		      ✔| Post(Hotel)
+		      ✔| Get(name, city, pincode)
+		      ✔| Post(hotelModel)
+              ✔| Put(hotelModel)
 		      ✔| Delete(id)
 
 =====================
@@ -93,45 +137,31 @@
 =====================
 ✔ IBookingRepository
 ✔ BookingRepository
-   |===>| Add(Booking)
-       ✔| Update(Booking)
-       ✔| Remove(id)
-       ✔| Get(id)
-       ✔| GetBookings()
+   |===> |
+       ✔| GetQueryable()
+       ✔| Add(booking)
+       ✔| Update(booking)
+       ✔| Delete(id)     
 =======================
   BLL LAYER (Booking)
 =======================
 	✔ IBookingService
 	✔ BookingServicce
-	   |===>| Add(Booking)
-               ✔| UpdateBookingDate(id,date)
-	       ✔| UpdateBookingStatus(id,status)
-	       ✔| Remove(id)
+	   |===> |
 	       ✔| Get(id)
-	       ✔| GetBookings()
+	       ✔| GetBookings()           
+           ✔| Search(date, hotelId, roomId)           	       
+           ✔| Add(bookingModel)
+           ✔| Update(bookingModel)
+	       ✔| Delete(id)
 ================================
       API LAYER (Booking)
 ================================
 		✔ BookingController
-		   |===>| Get()
-		       ✔| Get(id)
-		       ✔| Post(Booking)
-	               ✔| Put(id,date)
-		       ✔| put(id,status)
-		       ✔| Delete(id)
-
-==================
-Status of bookings
-==================
-0. Optional (Default)
-1. Definitive
-2. Cancelled
-3. Deleted 
-
-==================
-Cateogires of Room
-==================
-0. Basic
-1. Categories 1	size <35 m2
-2. Categories 2	size 36-50 m2
-3. Categories 3	size 51-100 m2
+		   |===>|
+              ✔| Get()
+		      ✔| Get(id)
+              ✔| Get(date, hotelId, roomId)
+		      ✔| Post(bookingModel)
+	          ✔| Put(bookingModel)
+		      ✔| Delete(id)
