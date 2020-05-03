@@ -52,10 +52,10 @@ id | Value
 ==================
 id | Value
 ==================
-0  | Basic
-1  | Categories 1	size <35 m2
-2  | Categories 2	size 36-50 m2
-3  | Categories 3	size 51-100 m2
+0  | Basic (Deafult)
+1  | Categories 1 (size <35 m2)
+2  | Categories 2 (size 36-50 m2)
+3  | Categories 3 (size 51-100 m2)
 
 ==================
 Layering Structure 
@@ -80,21 +80,21 @@ Layering Structure
 	   |===> |          	       
 	       ✔| GetRooms()
 	       ✔| SearchRoom(city, pincode, price, category)
-           ✔| Get(id)	       
-           ✔| Add(room)
-           ✔| Update(room)
+               ✔| Get(id)	       
+               ✔| Add(room)
+               ✔| Update(room)
 	       ✔| Remove(id)
-           ✔| IsAvailable(id)
+               ✔| IsAvailable(id)
 ================================
        API LAYER (Rooms)
 ================================
 		✔ RoomController
 		   |===> |
-               ✔| Get()
+                       ✔| Get()
 		       ✔| Get(id)
   		       ✔| Get(city, pincode, price, category)
  		       ✔| Post(room)
-               ✔| Put(room)
+                       ✔| Put(room)
 		       ✔| Delete(id)
  		       ✔| IsAvailable(id)
 
@@ -117,7 +117,7 @@ Layering Structure
 	      ✔| Get(id)
 	      ✔| GetHotels()
 	      ✔| SearchHotel(name, city, pincode)
-          ✔| Add(hotelModel)
+              ✔| Add(hotelModel)
 	      ✔| Update(hotelModel)
 	      ✔| Delete(id)
 ================================
@@ -125,11 +125,11 @@ Layering Structure
 ================================
 		✔ HotelController
 		   |===>| 
-              ✔| Get()
+                      ✔| Get()
 		      ✔| Get(id)
 		      ✔| Get(name, city, pincode)
 		      ✔| Post(hotelModel)
-              ✔| Put(hotelModel)
+                      ✔| Put(hotelModel)
 		      ✔| Delete(id)
 
 =====================
@@ -150,18 +150,18 @@ Layering Structure
 	   |===> |
 	       ✔| Get(id)
 	       ✔| GetBookings()           
-           ✔| Search(date, hotelId, roomId)           	       
-           ✔| Add(bookingModel)
-           ✔| Update(bookingModel)
+               ✔| Search(date, hotelId, roomId)           	       
+               ✔| Add(bookingModel)
+               ✔| Update(bookingModel)
 	       ✔| Delete(id)
 ================================
       API LAYER (Booking)
 ================================
 		✔ BookingController
 		   |===>|
-              ✔| Get()
+                      ✔| Get()
 		      ✔| Get(id)
-              ✔| Get(date, hotelId, roomId)
+                      ✔| Get(date, hotelId, roomId)
 		      ✔| Post(bookingModel)
-	          ✔| Put(bookingModel)
+	              ✔| Put(bookingModel)
 		      ✔| Delete(id)
