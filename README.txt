@@ -1,5 +1,11 @@
 
-[Find The Documentation Here](https://iamthakkarraj.github.io/WebApiAssignment/)
+[Find The API Documentation From Here](https://iamthakkarraj.github.io/WebApiAssignment/)
+
+[Find The Swagger.json From Here](https://github.com/iamthakkarraj/WebApiAssignment/blob/master/SWAGGER-JSON.JSON)
+
+[Find The Postman Collestion From Here](https://github.com/iamthakkarraj/WebApiAssignment/blob/master/POSTMAN-COLLECTION.JSON)
+
+
 
 ✔ Layering (DAL, BLL, Common, API)    
 ✔ Dependancy Injection    
