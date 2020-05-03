@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 namespace BLL.Interfaces {
 
     public interface IHotelService {
-
+        
+        List<HotelModel> GetHotels();
+        List<HotelModel> GetHotels(string name, string city, string pincode);
+        HotelModel GetHotelById(int id);        
         bool AddHotel(HotelModel hotel);
         bool DeleteHotel(int id);
-        List<HotelModel> GetHotels();
-        HotelModel GetHotelById(int id);
-        List<HotelModel> GetHotelByCity(string city);
-        List<HotelModel> GetHotelByPincode(string pincode);        
+        bool UpdateHotel(HotelModel hotel);
 
     }
 

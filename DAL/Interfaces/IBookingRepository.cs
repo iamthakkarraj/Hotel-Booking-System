@@ -9,11 +9,11 @@ namespace DAL.Interfaces {
 
     public interface IBookingRepository {
 
+        IQueryable<Booking> GetQueryable();
+        Booking GetBooking(int id);
         bool AddBooking(Booking booking);
         bool UpdateBooking(Booking booking);
-        bool RemoveBooking(int id);
-        List<Booking> GetBookings();
-        Booking GetBooking(int id);        
+        bool DeleteBooking(int id);           
 
     }
 

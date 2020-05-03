@@ -11,30 +11,31 @@ using System.Web.Http.Filters;
 
 namespace API {
 
-    public class BasicAuthenticationAttribute : AuthorizationFilterAttribute{
+    public class BasicAuthFilterAttribute : AuthorizationFilterAttribute{
 
-        public override void OnAuthorization(HttpActionContext actionContext) {
-            
+        public override void OnAuthorization(HttpActionContext actionContext) {            
             if (actionContext.Request.Headers.Authorization != null) {                
-                var arrUserNameandPassword = System.Text.Encoding.UTF8.GetString(
+                var credentials = System.Text.Encoding.UTF8.GetString(
                                                 Convert.FromBase64String(
                                                     actionContext.Request.Headers
                                                     .Authorization.Parameter))
                                                     .Split(':');                
-                if (IsAuthorizedUser(arrUserNameandPassword[0], arrUserNameandPassword[1])) {                        
-                    Thread.CurrentPrincipal = new GenericPrincipal(
-                        new GenericIdentity(arrUserNameandPassword[0]), null);
+                if (IsAuthorizedUser(credentials[0], credentials[1])) {
+                    AddPrincipleIdentity(credentials[0]);
                 } else {
                     actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
                 }
             } else {
                 actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
             }
-
         }
 
         public static bool IsAuthorizedUser(string Username, string Password) {            
             return Username == "raj" && Password == "12345";
+        }
+
+        public static void AddPrincipleIdentity(string password) {
+            Thread.CurrentPrincipal =new GenericPrincipal( new GenericIdentity(password), null);
         }
 
     }

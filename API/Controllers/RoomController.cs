@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace API.Controllers {
 
-    [BasicAuthentication]
+    [BasicAuthFilter]    
     public class RoomController : ApiController {
 
         private readonly IRoomService RoomService;
@@ -36,10 +36,10 @@ namespace API.Controllers {
             }
         }
         
-        [HttpGet, Route("api/Room/Search")]
+        [HttpGet, Route("api/Room/Search/")]
         public IHttpActionResult Get(int? price = null, int? category = null, string city = null, string pincode = null) {
             try {
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.SearchRoom(city, pincode, price, category)));
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.GetRooms(city, pincode, price, category)));
             } catch {
                 return InternalServerError();
             }
@@ -58,6 +58,15 @@ namespace API.Controllers {
         public IHttpActionResult Post(RoomModel room) {
             try {
                 return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.AddRoom(room)));
+            } catch {
+                return InternalServerError();
+            }
+        }
+
+        [HttpPut, Route("api/Room/Update/")]
+        public IHttpActionResult Put(RoomModel room) {
+            try {
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, RoomService.UpdateRoom(room)));
             } catch {
                 return InternalServerError();
             }

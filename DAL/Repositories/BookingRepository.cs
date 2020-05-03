@@ -22,6 +22,12 @@ namespace DAL.Repositories {
             DBContext = _DBContext;
         }
 
+        public IQueryable<Booking> GetQueryable() {
+            return DBContext.Bookings;
+        }
+        public Booking GetBooking(int id) {
+            return DBContext.Bookings.Where(x => x.BookingId == id).Where(x => x.Status != STATUS_DELETED).FirstOrDefault();
+        }
         public bool AddBooking(Booking booking) {
             try {
                 DBContext.Bookings.Add(booking);
@@ -31,7 +37,6 @@ namespace DAL.Repositories {
                 return false;
             }
         }
-
         public bool UpdateBooking(Booking booking) {
             try {
                 DBContext.Entry(booking).State = EntityState.Modified;
@@ -41,8 +46,7 @@ namespace DAL.Repositories {
                 return false;
             }
         }
-
-        public bool RemoveBooking(int id) {
+        public bool DeleteBooking(int id) {
             try {
                 DBContext.Bookings.Attach(DBContext.Bookings.Where(x => x.BookingId == id).FirstOrDefault()).Status = STATUS_DELETED;
                 DBContext.SaveChanges();
@@ -51,19 +55,7 @@ namespace DAL.Repositories {
                 return false;
             }
         }
-
-        public Booking GetBooking(int id) {
-            return DBContext.Bookings.Where(x => x.BookingId == id).Where(x => x.Status != STATUS_DELETED).FirstOrDefault();
-        }
-
-        public List<Booking> GetBookings() {
-            return DBContext.Bookings.OrderBy(x => x.BookingDate).Where(x => x.Status != STATUS_DELETED).ToList();
-        }
-
-        public bool SaveChanges() {
-            try { DBContext.SaveChanges(); return true; } catch { return false; }
-        }
-
+              
     }
 
 }

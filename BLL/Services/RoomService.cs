@@ -18,51 +18,45 @@ namespace BLL.Services {
             RoomRepository = _RoomRepository;
         }
 
-        public bool AddRoom(RoomModel room) {
-            return RoomRepository.AddRoom(ModelMapperService.Map<RoomModel, Room>(room));
-        }
-
-        public bool DeleteRoom(int id) {
-            return RoomRepository.DeleteRoom(id);
-        }
-
-        public bool UpdateRoom(RoomModel room) {
-            throw new NotImplementedException();
-        }
-
         public List<RoomModel> GetRooms() {
-            List<Room> source = RoomRepository.GetRoomsQueryable().OrderBy(x => x.Price).ToList();
+            List<Room> source = RoomRepository.GetQueryable().OrderBy(x => x.Price).ToList();
             List<RoomModel> destination = new List<RoomModel>();
             foreach (Room room in source) {
                 destination.Add(ModelMapperService.Map<Room, RoomModel>(room));
             }
             return destination;
         }
-
-        public RoomModel GetRoomById(int id) {
-            return ModelMapperService.Map<Room, RoomModel>(RoomRepository.GetRoomById(id));
-        }        
-
-        public bool IsAvailable(int id) {
-            return RoomRepository.IsAvailable(id);
-        }
-
-        public List<RoomModel> SearchRoom(string city, string pincode, int? price, int? category) {
+        public List<RoomModel> GetRooms(string city, string pincode, int? price, int? category) {
             List<RoomModel> destination = new List<RoomModel>();
-            IQueryable<Room> query = RoomRepository.GetRoomsQueryable().OrderBy(x => x.Price);            
-            if (city != null) 
+            IQueryable<Room> query = RoomRepository.GetQueryable().OrderBy(x => x.Price);
+            if (city != null)
                 query = query.Where(x => x.Hotel.City == city);
-            if (pincode != null) 
+            if (pincode != null)
                 query = query.Where(x => x.Hotel.PinCode == pincode);
-            if (price != null) 
+            if (price != null)
                 query = query.Where(x => x.Price == price);
-            if (category != null) 
-                query = query.Where(x => x.Category == category);                        
-            foreach(Room room in query.ToList()) {
+            if (category != null)
+                query = query.Where(x => x.Category == category);
+            foreach (Room room in query.ToList()) {
                 destination.Add(ModelMapperService.Map<Room, RoomModel>(room));
             }
             return destination;
         }
+        public RoomModel GetRoomById(int id) {
+            return ModelMapperService.Map<Room, RoomModel>(RoomRepository.GetRoomById(id));
+        }
+        public bool AddRoom(RoomModel room) {
+            return RoomRepository.AddRoom(ModelMapperService.Map<RoomModel, Room>(room));
+        }        
+        public bool UpdateRoom(RoomModel room) {
+            return RoomRepository.UpdateRoom(ModelMapperService.Map<RoomModel,Room>(room));
+        }
+        public bool DeleteRoom(int id) {
+            return RoomRepository.DeleteRoom(id);
+        }        
+        public bool IsAvailable(int id) {
+            return RoomRepository.IsAvailable(id);
+        }        
         
     }
 

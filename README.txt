@@ -19,6 +19,8 @@
 
 ✔ Basic Authentication Using Username And Password
 
+✔ Swagger API Implimentation
+
 ==================
  DAL LAYER (Rooms)
 ==================

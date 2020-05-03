@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace API.Controllers {
 
-    [BasicAuthentication]
+    [BasicAuthFilter]
     public class BookingController : ApiController {
 
         private readonly IBookingService BookingService;
@@ -36,6 +36,15 @@ namespace API.Controllers {
             }
         }
 
+        [HttpGet, Route("api/Booking/Search")]
+        public IHttpActionResult Get(Nullable<DateTime> date = null, int? roomId = null, int? hotelId=null) {
+            try {
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, BookingService.GetBookings(date, roomId, hotelId)));
+            } catch {
+                return InternalServerError();
+            }
+        }
+
         [HttpPost, Route("api/Booking/Add")]
         public IHttpActionResult Post(BookingModel booking) {
             try {
@@ -45,28 +54,19 @@ namespace API.Controllers {
             }
         }
 
-        [HttpPut, Route("api/Booking/Date")]
-        public IHttpActionResult Put(int id, DateTime bookingDate){
+        [HttpPut, Route("api/Booking/Update/")]
+        public IHttpActionResult Put(BookingModel booking){
             try {
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, BookingService.UpdateBookingDate(id, bookingDate)));
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, BookingService.UpdateBooking(booking)));
             } catch {
                 return InternalServerError();
             }
         }
-
-        [HttpPut, Route("api/Booking/Status")]
-        public IHttpActionResult Put(int id, int statusId) {
-            try {
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, BookingService.UpdateBookingStatus(id, statusId)));
-            } catch {
-                return InternalServerError();
-            }
-        }
-
+        
         [HttpDelete, Route("api/Booking/Delete/{id}")]
         public IHttpActionResult Delete(int id) {
             try {
-                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, BookingService.RemoveBooking(id)));
+                return ResponseMessage(Request.CreateResponse(HttpStatusCode.OK, BookingService.DeleteBooking(id)));
             } catch {
                 return InternalServerError();
             }

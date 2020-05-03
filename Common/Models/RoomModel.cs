@@ -11,7 +11,7 @@ namespace Common.Models {
         public int RoomId { get; set; }
         public Nullable<int> HotelId { get; set; }
         public string Name { get; set; }
-        public string Category { get; set; }
+        public int Category { get; set; }
         public int Price { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedDate { get; set; }

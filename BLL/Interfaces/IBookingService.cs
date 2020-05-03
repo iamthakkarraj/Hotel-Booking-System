@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 namespace BLL.Interfaces {
 
     public interface IBookingService {
-
-        bool AddBooking(BookingModel booking);
-        bool UpdateBookingDate(int id, DateTime bookingDate);
-        bool UpdateBookingStatus(int id,int statusId);
-        bool RemoveBooking(int id);
+        
         List<BookingModel> GetBookings();
+        List<BookingModel> GetBookings(Nullable<DateTime> date, int? roomId, int? hotelId);
         BookingModel GetBooking(int id);
+        bool AddBooking(BookingModel booking);
+        bool UpdateBooking(BookingModel booking);
+        bool DeleteBooking(int id);
 
     }
 

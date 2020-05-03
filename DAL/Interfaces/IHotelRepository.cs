@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 namespace DAL.Interfaces {
 
     public interface IHotelRepository {
-
-        List<Hotel> GetHotels();
-        Hotel GetHotelById(int id);
-        List<Hotel> GetHotelByCity(string city);
-        List<Hotel> GetHotelByPincode(string pincode);
+        
+        IQueryable<Hotel> GetQueryable();
+        Hotel GetHotelById(int id);        
         bool AddHotel(Hotel hotel);
+        bool UpdateHotel(Hotel hotel);
         bool DeleteHotel(int id);        
 
     }

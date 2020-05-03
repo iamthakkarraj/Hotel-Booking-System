@@ -9,12 +9,12 @@ namespace DAL.Interfaces {
 
     public interface IRoomRepository {
 
+        IQueryable<Room> GetQueryable();
+        Room GetRoomById(int id);
         bool AddRoom(Room room);
         bool UpdateRoom(Room room);
         bool DeleteRoom(int id);        
-        IQueryable<Room> GetRoomsQueryable();
-        Room GetRoomById(int id);
-        bool IsAvailable(int id);        
+        bool IsAvailable(int id); 
 
     }
 
