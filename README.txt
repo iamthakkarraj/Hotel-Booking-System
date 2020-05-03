@@ -1,12 +1,12 @@
 ✔ Layering
    |===>| DAL 	 (Data Access Layer)
-	    | BLL 	 (Buisness Logic Layer)
+	| BLL 	 (Buisness Logic Layer)
         | Common (ViewModels)
         | API	 (Application Programming Interface)
 
 ✔ Dependancy Injection
     |===>| BLL (Injecting Dependancy of Repository Classes From DAL)
-	     | API (Injecting Dependancy of Service Classes From BLL)
+	 | API (Injecting Dependancy of Service Classes From BLL)
 
 ✔ Model Mapping
    |===>| Using Model Mapper Service From BLL to Map Data Models With View Models
@@ -27,34 +27,34 @@
 ✔ IRoomRepository
 ✔ RoomRepository
    |===>| Add(room)
-      ✔| Update(room)
-      ✔	| Remove(id)
-      ✔| Get(id)
-      ✔| GetRooms()
-      ✔	| GetRoomsQueryable()
-      ✔	| IsAvailable(id)
+       ✔| Update(room)
+       ✔| Remove(id)
+       ✔| Get(id)
+       ✔| GetRooms()
+       ✔| GetRoomsQueryable()
+       ✔| IsAvailable(id)
 =======================
     BLL LAYER (Rooms)
 =======================
 	✔ IRoomService
 	✔ RoomServicce
 	   |===>| Add(room)
-          ✔| Update(room)
-	      ✔	| Remove(id)
-	      ✔| Get(id)
-	      ✔| GetRooms()
-	      ✔	| SearchRoom(city, pincode, price, category)
-	      ✔	| IsAvailable(id)
+               ✔| Update(room)
+	       ✔| Remove(id)
+	       ✔| Get(id)
+	       ✔| GetRooms()
+	       ✔| SearchRoom(city, pincode, price, category)
+	       ✔| IsAvailable(id)
 ================================
        API LAYER (Rooms)
 ================================
 		✔ RoomController
 		   |===>| Get()
-		      ✔| Get(id)
-		      ✔| Get(city, pincode, price, category)
-		      ✔| Post(room)
-		      ✔| Delete(id)
- 		      ✔| IsAvailable(id)
+		       ✔| Get(id)
+  		       ✔| Get(city, pincode, price, category)
+ 		       ✔| Post(room)
+		       ✔| Delete(id)
+ 		       ✔| IsAvailable(id)
 
 ==================
  DAL LAYER (Hotel)
@@ -86,7 +86,7 @@
 		      ✔| Get(id)
 		      ✔| Get(city,pincode) !!
 		      ✔| Post(Hotel)
-		      ✔	| Delete(id)
+		      ✔| Delete(id)
 
 =====================
  DAL LAYER (Booking)
@@ -94,31 +94,31 @@
 ✔ IBookingRepository
 ✔ BookingRepository
    |===>| Add(Booking)
-      ✔| Update(Booking)
-      ✔| Remove(id)
-      ✔| Get(id)
-      ✔| GetBookings()
+       ✔| Update(Booking)
+       ✔| Remove(id)
+       ✔| Get(id)
+       ✔| GetBookings()
 =======================
   BLL LAYER (Booking)
 =======================
 	✔ IBookingService
 	✔ BookingServicce
 	   |===>| Add(Booking)
-          ✔| UpdateBookingDate(id,date)
-	      ✔	| UpdateBookingStatus(id,status)
-	      ✔	| Remove(id)
-	      ✔| Get(id)
-	      ✔| GetBookings()
+               ✔| UpdateBookingDate(id,date)
+	       ✔| UpdateBookingStatus(id,status)
+	       ✔| Remove(id)
+	       ✔| Get(id)
+	       ✔| GetBookings()
 ================================
       API LAYER (Booking)
 ================================
 		✔ BookingController
 		   |===>| Get()
-		      ✔| Get(id)
-		      ✔| Post(Booking)
-	          ✔| Put(id,date)
-		      ✔| put(id,status)
-		      ✔| Delete(id)
+		       ✔| Get(id)
+		       ✔| Post(Booking)
+	               ✔| Put(id,date)
+		       ✔| put(id,status)
+		       ✔| Delete(id)
 
 ==================
 Status of bookings
