@@ -6,7 +6,6 @@
 [Find The Postman Collestion From Here](https://github.com/iamthakkarraj/WebApiAssignment/blob/master/POSTMAN-COLLECTION.JSON)
 
 
-
 ✔ Layering (DAL, BLL, Common, API)    
 ✔ Dependancy Injection    
 ✔ Model Mapping   
