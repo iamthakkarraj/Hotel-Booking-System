@@ -1,7 +1,5 @@
 ﻿using BLL.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Common.Models;
 using System.Net;
 using System.Net.Http;

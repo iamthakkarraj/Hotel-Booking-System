@@ -15,11 +15,13 @@ namespace API {
 
         public override void OnAuthorization(HttpActionContext actionContext) {            
             if (actionContext.Request.Headers.Authorization != null) {                
-                var credentials = System.Text.Encoding.UTF8.GetString(
-                                                Convert.FromBase64String(
-                                                    actionContext.Request.Headers
-                                                    .Authorization.Parameter))
-                                                    .Split(':');                
+                var credentials 
+                    = System.Text.Encoding
+                        .UTF8.GetString(
+                            Convert.FromBase64String(
+                                actionContext.Request.Headers
+                                .Authorization.Parameter))
+                        .Split(':');
                 if (IsAuthorizedUser(credentials[0], credentials[1])) {
                     AddPrincipleIdentity(credentials[0]);
                 } else {

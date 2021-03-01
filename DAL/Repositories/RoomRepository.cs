@@ -48,7 +48,11 @@ namespace DAL.Repositories {
         }        
         public bool DeleteRoom(int id) {
             try {
-                DBContext.Rooms.Remove(DBContext.Rooms.Where(x =>  x.RoomId == id).FirstOrDefault());
+                DBContext.Rooms
+                    .Remove(
+                        DBContext.Rooms
+                            .Where(x =>  x.RoomId == id)
+                            .FirstOrDefault());
                 DBContext.SaveChanges();
                 return true;
             } catch (Exception e) {
@@ -56,11 +60,11 @@ namespace DAL.Repositories {
             }
         }                
         public bool IsAvailable(int id) {
-            return (0 == DBContext.Bookings
-                        .Where(x => x.RoomId == id)
-                        .Where(x => x.Status != BookingRepository.STATUS_DELETED)
-                        .Where(x => x.Status != BookingRepository.STATUS_CANCELLED)
-                        .Count()) ? true : false;
+            return 0 == DBContext.Bookings                        
+                        .Where(x => x.RoomId == id)                                        
+                        .Where(x => x.Status != BookingRepository.STATUS_DELETED)                        
+                        .Where(x => x.Status != BookingRepository.STATUS_CANCELLED)                        
+                        .Count();
         }
 
     }

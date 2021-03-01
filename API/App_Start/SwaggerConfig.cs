@@ -12,8 +12,6 @@ namespace API
     {
         public static void Register()
         {
-            var thisAssembly = typeof(SwaggerConfig).Assembly;
-
             GlobalConfiguration.Configuration
                 .EnableSwagger(c =>{
                     c.SingleApiVersion("v1", "API");
@@ -22,8 +20,7 @@ namespace API
                 })
                 .EnableSwaggerUi(c =>{
                     c.DocumentTitle("My Swagger UI");
-                    c.InjectStylesheet(thisAssembly, "Swashbuckle.Dummy.SwaggerExtensions.testStyles1.css");
-                    
+                    c.InjectStylesheet(typeof(SwaggerConfig).Assembly, "Swashbuckle.Dummy.SwaggerExtensions.testStyles1.css");                    
                 });          
         }
     }

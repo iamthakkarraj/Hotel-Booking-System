@@ -26,7 +26,10 @@ namespace DAL.Repositories {
             return DBContext.Bookings;
         }
         public Booking GetBooking(int id) {
-            return DBContext.Bookings.Where(x => x.BookingId == id).Where(x => x.Status != STATUS_DELETED).FirstOrDefault();
+            return DBContext.Bookings
+                    .Where(x => x.BookingId == id)
+                    .Where(x => x.Status != STATUS_DELETED)
+                    .FirstOrDefault();
         }
         public bool AddBooking(Booking booking) {
             try {
@@ -48,7 +51,12 @@ namespace DAL.Repositories {
         }
         public bool DeleteBooking(int id) {
             try {
-                DBContext.Bookings.Attach(DBContext.Bookings.Where(x => x.BookingId == id).FirstOrDefault()).Status = STATUS_DELETED;
+                DBContext.Bookings
+                    .Attach(
+                        DBContext.Bookings
+                            .Where(x => x.BookingId == id)
+                            .FirstOrDefault())
+                            .Status = STATUS_DELETED;
                 DBContext.SaveChanges();
                 return true;
             }catch(Exception e) {

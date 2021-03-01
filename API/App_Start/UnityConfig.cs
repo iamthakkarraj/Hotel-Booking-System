@@ -9,19 +9,17 @@ namespace API{
 
     public static class UnityConfig{
 
-        public static void RegisterComponents(){
+        public static void RegisterComponents(){			
 
-			var container = new UnityContainer();                                                           
-
-            GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
-
-            container.RegisterType<IHotelService, HotelService>();
-            container.RegisterType<IRoomService, RoomService>();
-            container.RegisterType<IBookingService, BookingService>();
-            container.AddNewExtension<BLLUnityExtenstion>();
+            GlobalConfiguration.Configuration.DependencyResolver
+                = new UnityDependencyResolver(
+                    new UnityContainer()
+                    .RegisterType<IHotelService, HotelService>()
+                    .RegisterType<IRoomService, RoomService>()
+                    .RegisterType<IBookingService, BookingService>()
+                    .AddNewExtension<BLLUnityExtenstion>()
+                );
 
         }
-
     }
-
 }
