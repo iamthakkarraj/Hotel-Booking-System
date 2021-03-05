@@ -1,4 +1,5 @@
 using BLL;
+using BLL.StackExchange;
 using BLL.Interfaces;
 using BLL.Services;
 using System.Web.Http;
@@ -9,7 +10,7 @@ namespace API{
 
     public static class UnityConfig{
 
-        public static void RegisterComponents(){			
+        public static void RegisterComponents(){
 
             GlobalConfiguration.Configuration.DependencyResolver
                 = new UnityDependencyResolver(
@@ -17,6 +18,7 @@ namespace API{
                     .RegisterType<IHotelService, HotelService>()
                     .RegisterType<IRoomService, RoomService>()
                     .RegisterType<IBookingService, BookingService>()
+                    .RegisterType<RedisManager, RedisManager>()
                     .AddNewExtension<BLLUnityExtenstion>()
                 );
 

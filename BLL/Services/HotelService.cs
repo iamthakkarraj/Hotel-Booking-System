@@ -7,24 +7,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BLL.CacheManager;
+using Newtonsoft.Json;
+using BLL.StackExchange;
 
 namespace BLL.Services {
 
     public class HotelService : IHotelService {
 
         readonly IHotelRepository HotelRepository;
+        private readonly RedisManager _redisManager;
+        public const string CACHE_KEY_PREFIX = "Hotel_";
 
         public HotelService(IHotelRepository _HotelRepository) {
             HotelRepository = _HotelRepository;
+            _redisManager = new RedisManager();
         }
                 
         public List<HotelModel> GetHotels() {
-            List<Hotel> source = HotelRepository.GetQueryable().OrderBy(x => x.Name).ToList();
-            List<HotelModel> destination = new List<HotelModel>();
-            foreach (Hotel hotel in source) {
-                destination.Add(ModelMapperService.Map<Hotel, HotelModel>(hotel));
+            var cachedData = this._redisManager.Get<List<HotelModel>>(CACHE_KEY_PREFIX + 0);
+
+            if (cachedData == null || !cachedData.Any())
+            {
+                List<Hotel> source = HotelRepository.GetQueryable().OrderBy(x => x.Name).ToList();
+                List<HotelModel> destination = new List<HotelModel>();
+                foreach (Hotel hotel in source)
+                {
+                    destination.Add(ModelMapperService.Map<Hotel, HotelModel>(hotel));
+                }
+                this._redisManager.AddRange<HotelModel>("Hotels", destination);
+                this._redisManager.StoreAsHasMap<HotelModel>(destination, "HotelId");
+                this._redisManager.Set<List<HotelModel>>(CACHE_KEY_PREFIX + 0, destination);
+                return destination;                
             }
-            return destination;
+            else
+            {
+                return cachedData;
+            }
         }
         public List<HotelModel> GetHotels(string name, string city, string pincode) {
             List<HotelModel> destination = new List<HotelModel>();
@@ -41,7 +60,19 @@ namespace BLL.Services {
             return destination;
         }
         public HotelModel GetHotelById(int id) {
-            return ModelMapperService.Map<Hotel,HotelModel>(HotelRepository.GetHotelById(id));
+
+            var cachedData = this._redisManager.GetFromHash<HotelModel>(id.ToString());
+
+            if (cachedData != null && cachedData.HotelId > 0)
+            {
+                return cachedData;
+            }
+            else { 
+                var data = ModelMapperService.Map<Hotel, HotelModel>(HotelRepository.GetHotelById(id));
+                this._redisManager.StoreAsHasMap<HotelModel>(id.ToString(), data);
+                return data;
+            }
+
         }                
         public bool AddHotel(HotelModel hotel) {
             return HotelRepository.AddHotel(ModelMapperService.Map<HotelModel, Hotel>(hotel));

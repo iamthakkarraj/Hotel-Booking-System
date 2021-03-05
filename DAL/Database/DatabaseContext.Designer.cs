@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\iamth\Documents\Code\ASP.NET\Assignment-4\WebApiAssignment\DAL\Database\DatabaseContext.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\raj.thakkar\source\repos\Hotel-Booking-System\DAL\Database\DatabaseContext.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

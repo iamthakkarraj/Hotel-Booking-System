@@ -1,4 +1,5 @@
-﻿using BLL.Interfaces;
+﻿using BLL.CacheManager.ServiceStack;
+using BLL.Interfaces;
 using Common.Models;
 using DAL.Database;
 using DAL.Interfaces;
@@ -13,18 +14,30 @@ namespace BLL.Services {
     public class BookingService : IBookingService {
 
         private readonly IBookingRepository BookingRepository;
+        private readonly RedisManager _redisManager;
 
         public BookingService(IBookingRepository _BookingRepository) {
             this.BookingRepository = _BookingRepository;
+            _redisManager = new RedisManager();
         }
         
-        public List<BookingModel> GetBookings() {
-            List<Booking> source = BookingRepository.GetQueryable().OrderBy(x => x.BookingDate).ToList();
-            List<BookingModel> destination = new List<BookingModel>();
-            foreach (Booking booking in source) {
-                destination.Add(ModelMapperService.Map<Booking, BookingModel>(booking));
+        public List<BookingModel> GetBookings() {            
+            var cachedData = this._redisManager.GetList<BookingModel>().ToList();
+            if (cachedData == null || !cachedData.Any())
+            {
+                List<Booking> source = BookingRepository.GetQueryable().OrderBy(x => x.BookingDate).ToList();
+                List<BookingModel> destination = new List<BookingModel>();
+                foreach (Booking booking in source)
+                {
+                    destination.Add(ModelMapperService.Map<Booking, BookingModel>(booking));
+                }
+                this._redisManager.SetList<BookingModel>(destination);  
+                return destination;
             }
-            return destination;
+            else
+            {
+                return cachedData;
+            }
         }
         public List<BookingModel> GetBookings(Nullable<DateTime> date, int? roomId, int? hotelId) {
             List<BookingModel> destination = new List<BookingModel>();

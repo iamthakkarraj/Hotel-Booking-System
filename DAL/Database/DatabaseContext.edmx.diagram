@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="db41a0ea77d14dd0903e5f4186025a26" Name="Diagram1">
+      <Diagram DiagramId="ab5103803e0348ac91008e363246d8e2" Name="Diagram1">
         <EntityTypeShape EntityType="WebApiAssignmentModel.Booking" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="WebApiAssignmentModel.Hotel" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="WebApiAssignmentModel.Room" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <AssociationConnector Association="WebApiAssignmentModel.FK__Booking__RoomId__5CD6CB2B" ManuallyRouted="false" />
-        <AssociationConnector Association="WebApiAssignmentModel.FK__Room__HotelId__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="WebApiAssignmentModel.FK__Booking__RoomId__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="WebApiAssignmentModel.FK__Room__HotelId__3C69FB99" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

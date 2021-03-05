@@ -105,7 +105,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CacheManager\RedisManager.cs" />
     <Compile Include="Database\Booking.cs">
       <DependentUpon>DatabaseContext.tt</DependentUpon>
     </Compile>
@@ -134,7 +133,6 @@
     <Compile Include="Interfaces\IHotelRepository.cs" />
     <Compile Include="Interfaces\IRoomRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CacheManager\IRedisConnection.cs" />
     <Compile Include="Repositories\BookingRepository.cs" />
     <Compile Include="Repositories\HotelRepository.cs" />
     <Compile Include="Repositories\RoomRepository.cs" />
